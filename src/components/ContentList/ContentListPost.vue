@@ -1,7 +1,8 @@
 <template>
 	<div class="post">
 		<h2>{{ post.headline }}</h2>
-		<p>{{ post.content }}</p>
+		<p>{{ post.content }}...</p>
+		<a>Read more</a>
 	</div>
 </template>
 <script>
@@ -21,7 +22,12 @@ export default {
 	border-bottom: 1px solid #ddd;
 }
 
+.post a {
+	color: blue;
+}
+
 .post h2 {
+	color: #000;
 	font-size: 1.3em;
 	padding-bottom: 0.25rem;
 }

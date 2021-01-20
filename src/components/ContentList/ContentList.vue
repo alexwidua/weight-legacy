@@ -4,7 +4,7 @@
 		<!--TODO: remove color (used for debugging)-->
 		<div
 			ref="loadTrigger"
-			style="display:block;width:100px; height:100px;background: red"
+			style="display:block;width:100px; height:100px;"
 		/>
 	</div>
 </template>

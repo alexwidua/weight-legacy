@@ -1,10 +1,5 @@
 <template>
 	<div id="app">
-		<!-- TODO: Set up routing -->
-		<div id="nav" class="nav">
-			<router-link to="/">Main</router-link> |
-			<router-link to="/play">Playground</router-link>
-		</div>
 		<router-view />
 	</div>
 </template>
@@ -12,13 +7,14 @@
 <style>
 body {
 	overflow: hidden;
+	background: #000;
 }
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #2c3e50;
+	color: #fff;
 }
 
 #nav {
@@ -27,10 +23,10 @@ body {
 
 #nav a {
 	font-weight: bold;
-	color: #2c3e50;
+	color: rgb(141, 141, 141);
 }
 
 #nav a.router-link-exact-active {
-	color: #42b983;
+	color: #ffffff;
 }
 </style>
