@@ -4,29 +4,21 @@
 	</div>
 </template>
 
-<style>
+<style lang="scss">
 body {
 	overflow: hidden;
-	background: #000;
+	background: #f1f2f6;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
 }
 #app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #fff;
-}
-
-#nav {
-	padding: 30px;
-}
-
-#nav a {
-	font-weight: bold;
-	color: rgb(141, 141, 141);
-}
-
-#nav a.router-link-exact-active {
-	color: #ffffff;
+	/* text-align: center; */
+	color: #000;
+	max-width: 450px;
+	margin: 0 auto;
 }
 </style>

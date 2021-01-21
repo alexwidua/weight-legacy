@@ -1,0 +1,17 @@
+* {
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-overflow-scrolling: touch;
+	mix-blend-mode: normal;
+	// Font liga
+	font-variant-ligatures: normal;
+	font-feature-settings: 'liga' 1;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
