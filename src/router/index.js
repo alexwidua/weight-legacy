@@ -15,13 +15,31 @@ const routes = [
 		name: 'Default',
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/DefaultView.vue')
+	},
+	{
+		path: '/exploration-1',
+		name: 'Exploration-1',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '../views/Exploration-1-View.vue'
+			)
+	},
+	{
+		path: '/exploration-2',
+		name: 'Exploration-2',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '../views/Exploration-2-View.vue'
+			)
+	},
+	{
+		path: '/exploration-3',
+		name: 'Exploration-3',
+		component: () =>
+			import(
+				/* webpackChunkName: "about" */ '../views/Exploration-3-View.vue'
+			)
 	}
-	// {
-	// 	path: '/exploration-1',
-	// 	name: 'Exploration-1',
-	// 	component: () =>
-	// 		import(/* webpackChunkName: "about" */ '../views/Exploration-1.vue')
-	// }
 ]
 
 const router = new VueRouter({
