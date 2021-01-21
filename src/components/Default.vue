@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="scroll-wrapper"
-		:style="`transform:translateY(${contentPosition}px`"
-	>
+	<div class="container" :style="`transform:translateY(${contentPosition}px`">
 		<ContentList />
 	</div>
 </template>
@@ -11,22 +8,29 @@
 import ContentList from './ContentList/ContentList.vue'
 
 export default {
+	components: {
+		ContentList
+	},
 	data() {
 		return {
 			// pointer
 			pointerPosition: 0,
 			pointerOrigin: 0,
 			pointerDragOffset: 0,
+
 			// scroll content
 			contentPosition: 0,
 			contentPreviousPosition: 0,
+
 			// checkers
 			isDragging: false,
 			isTracking: false,
 			isTouch: false,
+
 			// physics
 			velocity: 0,
 			//friction: 0.05 => prop
+
 			// animation frame
 			rafID: null
 		}
@@ -42,7 +46,10 @@ export default {
 		}
 	},
 	methods: {
-		// pointer event handlers
+		/**
+		 * Handle pointer down event
+		 * Sets initial position and inits tracking animation loop
+		 */
 		pointerDown(e) {
 			this.isDragging = true
 
@@ -50,17 +57,21 @@ export default {
 			this.isTouch = !!(e.touches && e.touches[0])
 			const eventData = this.isTouch ? e.touches[0] : e
 			const { pageY } = eventData
-			if (!this.isTouch) {
-				e.preventDefault()
-			}
-			// where scrollin starts
+
 			this.pointerOrigin = pageY
 			// pick up previous content contentPosition
 			this.contentPreviousPosition = this.contentPosition
 			this.calcPointerPosition(e)
 			// init tracking/momentum
 			this.initTracking()
+
+			if (!this.isTouch) {
+				e.preventDefault()
+			}
 		},
+		/**
+		 * Handle pointer move event
+		 */
 		pointerMove(e) {
 			if (!this.isTouch) {
 				e.preventDefault()
@@ -68,9 +79,15 @@ export default {
 			// delegate logic to another function
 			this.calcPointerPosition(e)
 		},
+		/**
+		 * Handle pointer up event
+		 */
 		pointerUp() {
 			this.isDragging = false
 		},
+		/**
+		 * Get pointer position
+		 */
 		calcPointerPosition(e) {
 			if (!this.isDragging) {
 				return
@@ -83,14 +100,19 @@ export default {
 			this.pointerPosition =
 				this.contentPreviousPosition + this.pointerDragOffset
 		},
-		// init tracking/momentum
+		/**
+		 * Initiate tracking animation loop (used for momentum)
+		 */
 		initTracking() {
 			this.isTracking = true
+
 			// cancel out possible previous tracking
 			cancelAnimationFrame(this.rafID)
 			this.rafID = requestAnimationFrame(() => this.track())
 		},
-		// recursive animation loop for momentum
+		/**
+		 * Recursive animation loop (used for momentum)
+		 */
 		track() {
 			if (!this.isTracking) {
 				return
@@ -101,18 +123,25 @@ export default {
 			this.updatePosition()
 			this.rafID = requestAnimationFrame(() => this.track())
 		},
-		// physics
+		/**
+		 * Calculate drag force used for momentum
+		 */
 		calcForce() {
 			if (!this.isDragging && this.useMomentum) {
 				return
 			}
 			const dragVelocity = this.pointerPosition - this.contentPosition
-			this.calcVelocity(dragVelocity - this.velocity)
+			this.applyForce(dragVelocity - this.velocity)
 		},
-		calcVelocity(force) {
+		/**
+		 * Apply drag force to current velocity
+		 */
+		applyForce(force) {
 			this.velocity += force
 		},
-		// update DOM content position
+		/**
+		 * Update position for DOM
+		 */
 		updatePosition() {
 			this.calcForce()
 			const inverseFriction = 1 - this.friction
@@ -123,7 +152,9 @@ export default {
 		}
 	},
 	computed: {
-		// check if pointer is dragging or content is tracking
+		/**
+		 * Check if DOM content still has momentum
+		 */
 		isMoving() {
 			return this.isDragging || Math.abs(this.velocity) >= 0.05
 		}
@@ -147,17 +178,12 @@ export default {
 		window.removeEventListener('touchstart', this.pointerDown)
 		window.removeEventListener('touchmove', this.pointerMove)
 		window.removeEventListener('touchend', this.pointerUp)
-	},
-	components: {
-		ContentList
 	}
 }
 </script>
 
-<style scoped>
-.scroll-wrapper {
+<style lang="scss" scoped>
+.container {
 	touch-action: none;
-	max-width: 600px;
-	margin: 0 auto;
 }
 </style>
