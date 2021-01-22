@@ -21,28 +21,42 @@ export default {
 		}
 	},
 	components: { Post },
+	props: {
+		infiniteLoad: {
+			type: Boolean,
+			default: true
+		},
+		numPosts: {
+			type: Number,
+			default: 10
+		}
+	},
 	methods: {
 		// intersection observer callback
 		handleObserve() {
 			this.loadMore()
 		},
 		loadMore() {
-			let newPosts = fetchPosts(10)
+			let newPosts = fetchPosts(this.numPosts)
 			this.posts.push(...newPosts)
 		}
 	},
 	mounted() {
 		// load initial posts
-		this.posts = fetchPosts(10)
-		// trigger element at bottom of list triggers new content load
-		this.observer.observe(this.$refs.loadTrigger)
+		this.posts = fetchPosts(this.numPosts)
+		if (this.infiniteLoad) {
+			// trigger element at bottom of list triggers new content load
+			this.observer.observe(this.$refs.loadTrigger)
+		}
 	},
 	created() {
-		// create intersection observer instance to infinite load content
-		this.observer = new IntersectionObserver(this.handleObserve, {
-			root: this.$el,
-			threshold: 1.0
-		})
+		if (this.infiniteLoad) {
+			// create intersection observer instance to infinite load content
+			this.observer = new IntersectionObserver(this.handleObserve, {
+				root: this.$el,
+				threshold: 1.0
+			})
+		}
 	}
 }
 </script>

@@ -1,0 +1,21 @@
+.banner {
+	display: flex;
+	align-items: center;
+	width: calc(100% + 48px);
+	height: 40px;
+	margin-bottom: 16px;
+	margin-left: -24px;
+	padding: 0 16px;
+	color: rgb(151, 151, 151);
+	font-family: 'Roboto Mono', monospace;
+	background: #f0f0f0;
+}
+
+.intro {
+	padding: 8px 32px 0 32px;
+	font-size: 0.75em;
+	font-family: 'Roboto Mono', monospace;
+	line-height: 1.5em;
+	text-align: center;
+	opacity: 0.75;
+}

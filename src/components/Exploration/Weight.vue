@@ -1,6 +1,9 @@
 <template>
 	<div class="container" :style="`transform:translateY(${contentPosition}px`">
-		<h1>Gravity</h1>
+		<div class="intro">
+			Tap ⚙️ to change the weight to make the feed feel lighter or
+			heavier.
+		</div>
 		<ContentList />
 	</div>
 </template>
@@ -106,6 +109,7 @@ export default {
 		 */
 		initTracking() {
 			this.isTracking = true
+
 			// cancel out possible previous tracking
 			cancelAnimationFrame(this.rafID)
 			this.rafID = requestAnimationFrame(() => this.track())
@@ -120,12 +124,6 @@ export default {
 			if (!this.isMoving) {
 				this.isTracking = false
 			}
-
-			// contentPos == 0 equals animation stop
-			if (!this.isDragging && this.contentPosition == 0) {
-				this.isTracking = false
-			}
-
 			this.updatePosition()
 			this.rafID = requestAnimationFrame(() => this.track())
 		},
@@ -150,21 +148,19 @@ export default {
 		 */
 		updatePosition() {
 			this.calcForce()
-			// add 'gravity' so that content bounces back to top
-			this.applyForce(2 * (this.contentPosition * -0.002))
-
 			const inverseFriction = 1 - this.friction
 			this.velocity *= inverseFriction
 			this.contentPosition += this.velocity
-
 			// prevent scrolling out of bounds
 			this.contentPosition = Math.min(this.contentPosition, 0)
 		}
 	},
 	computed: {
-		// check if pointer is dragging or content is tracking
+		/**
+		 * Check if DOM content still has momentum
+		 */
 		isMoving() {
-			return this.isDragging || this.contentPosition < 0
+			return this.isDragging || Math.abs(this.velocity) >= 0.05
 		}
 	},
 	created() {

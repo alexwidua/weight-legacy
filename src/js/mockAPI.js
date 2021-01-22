@@ -1,18 +1,24 @@
-var names = [
-	'Clickbaity headline',
-	'Made-up sob story',
-	'Shady advertisement',
-	'Dishonest product placement'
+var headlines = [
+	'Clickbaity headline 😱',
+	'Made-up sob story 😭',
+	'Shady advertisement 👽',
+	'Dishonest product placement 🤙'
+]
+
+let contents = [
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+	'Lorem consectetur adipiscing elit. Aenean sit amet luctus enim.',
+	'Lorem ipsum dolor sit amet, consectetur.',
+	'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet luctus enim, id vestibulum quam.'
 ]
 
 const fetchPosts = (number) => {
 	let content = []
 
-	for (var i = 0; i < number; i++) {
+	for (let i = Math.floor(Math.random() * 4); i < number; i++) {
 		content.push({
-			headline: names[i % names.length],
-			content:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet luctus enim, id vestibulum quam. Proin aliquet bibendum nisl sit amet posuere. Maecenas eget neque a quam eleifend vulputate. Sed eros metus, porttitor eu feugiat in, feugiat vitae arcu.'
+			headline: headlines[i % headlines.length],
+			content: contents[i % contents.length]
 		})
 	}
 

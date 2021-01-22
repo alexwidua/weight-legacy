@@ -1,15 +1,53 @@
 <template>
-	<div class="container" :style="`transform:translateY(${contentPosition}px`">
-		<ContentList />
+	<div
+		class="container"
+		:style="`transform:translateY(${contentPosition}px`"
+		ref="container"
+	>
+		<div class="intro">
+			Weight gives a bias to certain posts in the feed.
+		</div>
+		<Post
+			v-for="i in 6"
+			:key="i + 'x'"
+			:post="{
+				headline: 'Unbiased post',
+				content:
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet luctus enim, id vestibulum quam.'
+			}"
+			style="height:210px"
+		/>
+		<div ref="bias">
+			<Post
+				class="biased"
+				:class="{ 'biased--visible': targetInViewport }"
+				:post="{
+					headline: 'Biased post',
+					content:
+						'This is a biased post. When it scrolls into view, it attracts the viewport and tries to stick to the center'
+				}"
+				style="height:210px"
+			/>
+		</div>
+		<Post
+			v-for="i in 8"
+			:key="i + 'y'"
+			:post="{
+				headline: 'Unbiased post',
+				content:
+					'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sit amet luctus enim, id vestibulum quam.'
+			}"
+			style="height:210px"
+		/>
 	</div>
 </template>
 
 <script>
-import ContentList from './ContentList/ContentList.vue'
+import Post from '../ContentList/ContentListPost.vue'
 
 export default {
 	components: {
-		ContentList
+		Post
 	},
 	data() {
 		return {
@@ -29,20 +67,21 @@ export default {
 
 			// physics
 			velocity: 0,
-			//friction: 0.05 => prop
+			friction: 0.05,
 
 			// animation frame
-			rafID: null
+			rafID: null,
+
+			// misc
+			targetInViewport: false,
+			target: 1450
+			//bias: 5
 		}
 	},
 	props: {
-		friction: {
+		bias: {
 			type: Number,
-			default: 0.05
-		},
-		useMomentum: {
-			type: Boolean,
-			default: true
+			default: 5
 		}
 	},
 	methods: {
@@ -108,6 +147,7 @@ export default {
 
 			// cancel out possible previous tracking
 			cancelAnimationFrame(this.rafID)
+
 			this.rafID = requestAnimationFrame(() => this.track())
 		},
 		/**
@@ -120,6 +160,12 @@ export default {
 			if (!this.isMoving) {
 				this.isTracking = false
 			}
+
+			// contentPos == 0 equals animation stop
+			if (!this.isDragging && this.contentPosition == 0) {
+				this.isTracking = false
+			}
+
 			this.updatePosition()
 			this.rafID = requestAnimationFrame(() => this.track())
 		},
@@ -127,7 +173,7 @@ export default {
 		 * Calculate drag force used for momentum
 		 */
 		calcForce() {
-			if (!this.isDragging && this.useMomentum) {
+			if (!this.isDragging) {
 				return
 			}
 			const dragVelocity = this.pointerPosition - this.contentPosition
@@ -144,20 +190,58 @@ export default {
 		 */
 		updatePosition() {
 			this.calcForce()
-			const inverseFriction = 1 - this.friction
+			// add target bias
+			const browserTarget = -this.target + window.innerHeight / 2
+
+			// Calculate target force, enables the bounce effect when focusing bias
+			const targetDiff = this.contentPosition - browserTarget
+			const targetForce = Math.min(Math.abs(targetDiff) * 0.1, this.bias)
+
+			if (this.targetInViewport) {
+				this.applyForce(
+					this.contentPosition < browserTarget
+						? targetForce
+						: -targetForce
+				)
+			}
+
+			// change friction when focusing bias
+			const inverseFriction = this.targetInViewport
+				? this.bias > 0
+					? 0.8
+					: 1 - this.friction
+				: 1 - this.friction
+
 			this.velocity *= inverseFriction
 			this.contentPosition += this.velocity
+
 			// prevent scrolling out of bounds
-			this.contentPosition = Math.min(this.contentPosition, 0)
+			// dirty workaround because vue route messes up the refs
+			const contentHeight = this.$refs.container
+				? -this.$refs.container.clientHeight + window.innerHeight
+				: 9999
+
+			this.contentPosition = Math.max(
+				Math.min(this.contentPosition, 0),
+				contentHeight
+			)
+		},
+		/**
+		 * Hanlde Intersection Observer
+		 */
+		handleObserve(entry) {
+			// this.velocity = 0
+			this.targetInViewport = entry[0].isIntersecting
 		}
 	},
 	computed: {
-		/**
-		 * Check if DOM content still has momentum
-		 */
+		// check if pointer is dragging or content is tracking
 		isMoving() {
-			return this.isDragging || Math.abs(this.velocity) >= 0.05
+			return this.isDragging || Math.abs(this.velocity) >= 0.02
 		}
+	},
+	mounted() {
+		this.observer.observe(this.$refs.bias)
 	},
 	created() {
 		// mouse
@@ -168,6 +252,12 @@ export default {
 		window.addEventListener('touchstart', this.pointerDown, false)
 		window.addEventListener('touchmove', this.pointerMove, false)
 		window.addEventListener('touchend', this.pointerUp, false)
+
+		// observer
+		this.observer = new IntersectionObserver(this.handleObserve, {
+			root: null,
+			threshold: 0
+		})
 	},
 	beforeDestroy() {
 		// mouse
@@ -185,5 +275,17 @@ export default {
 <style lang="scss" scoped>
 .container {
 	touch-action: none;
+}
+
+.biased {
+	height: 260px;
+	border: 2px solid transparent;
+	transition: all 0.5s;
+	transition-delay: 0.2s;
+
+	&--visible {
+		//background: var(--content-marked);
+		border: 2px solid var(--content-marked-border);
+	}
 }
 </style>

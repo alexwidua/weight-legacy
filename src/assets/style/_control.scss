@@ -1,0 +1,74 @@
+.control {
+	position: fixed;
+	bottom: 8px;
+	left: 50%;
+	z-index: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: auto;
+	max-width: var(--content-width);
+	//height: var(--nav-height);
+	padding: 12px;
+	color: var(--control-text-primary);
+	//font-size: 0.9em;
+	font-family: 'IBM Plex Mono', monospace;
+	background: var(--control-bg);
+	border-top: 1px solid #eee;
+	border-radius: 64px;
+	transform: translateX(-50%);
+
+	&-button {
+		width: auto;
+		height: 34px;
+		//margin-left: 6px;
+		padding: 0 12px;
+		line-height: 32px;
+		white-space: nowrap;
+		text-align: center;
+		background: var(--control-button);
+		//border: 1px solid #eee;
+		border-radius: 16px;
+		cursor: pointer;
+
+		&--first {
+			margin-right: 4px;
+		}
+
+		&:not(:last-child) {
+			margin-right: 8px;
+		}
+
+		&:hover {
+			background: vr(--control-button-hover);
+		}
+
+		&:active {
+			color: #000;
+			background: #fff;
+		}
+
+		&.selected {
+			color: var(--control-button-active-text);
+			background: var(--control-button-active);
+		}
+	}
+}
+
+.cog {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 120;
+	padding: 8px;
+	font-size: 2em;
+	border-radius: 100%;
+	cursor: pointer;
+	//opacity: 0.5;
+}
+
+@media (min-width: 992px) {
+	.cog {
+		position: absolute;
+	}
+}

@@ -1,24 +1,38 @@
 <template>
 	<div id="app">
+		<Nav
+			v-if="!this.$router.currentRoute.meta.hideNav"
+			:name="this.$router.currentRoute.name"
+			:num="this.$router.currentRoute.meta.num"
+			:bg_color="this.$router.currentRoute.meta.bg_color"
+			:color="this.$router.currentRoute.meta.color"
+		/>
+
 		<router-view />
 	</div>
 </template>
 
-<style lang="scss">
-body {
-	overflow: hidden;
-	background: #f1f2f6;
-	padding: 0;
-	margin: 0;
-	cursor: pointer;
+<script>
+import Nav from '@/components/Common/Nav.vue'
+
+export default {
+	components: {
+		Nav
+	}
 }
+</script>
+<style lang="scss">
 #app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	/* text-align: center; */
-	color: #000;
-	max-width: 450px;
+	max-width: var(--content-width);
 	margin: 0 auto;
+	//margin-top: 48px;
+	background: var(--app-bg);
+}
+
+@media (min-width: 992px) {
+	#app {
+		position: relative;
+		max-height: calc(100vh - 48px);
+	}
 }
 </style>
