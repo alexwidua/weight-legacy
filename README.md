@@ -1,3 +1,3 @@
 # weight
 
-TODO: small
+TODO: Add small README
