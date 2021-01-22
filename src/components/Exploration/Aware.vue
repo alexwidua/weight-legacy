@@ -5,7 +5,7 @@
 		:style="`transform:translateY(${contentPosition}px`"
 		ref="container"
 	>
-		<div class="intro">
+		<div class="hint">
 			A change of friction emphasizes certain parts of this article.
 		</div>
 		<div class="inner">
@@ -49,6 +49,16 @@
 				varius libero vel, elementum lacus.
 			</p>
 			<p>
+				Praesent vitae lacus massa. Nullam convallis ut magna vitae
+				accumsan. Cras elementum purus sit amet scelerisque ornare.
+				Pellentesque bibendum enim eu felis pulvinar varius. Phasellus
+				vehicula lorem in blandit porta. Sed vulputate sapien et magna
+				scelerisque elementum. Sed mattis pellentesque nisi eget
+				ullamcorper. Suspendisse mauris tortor, imperdiet eu nunc a,
+				convallis pulvinar diam. Nunc quis fringilla est, in varius
+				augue.
+			</p>
+			<p>
 				Curabitur pretium velit leo, eu ultricies tortor tincidunt nec.
 				Donec non dignissim odio. Quisque pellentesque viverra nunc ut
 				vehicula. Mauris magna odio, vehicula nec gravida quis, sodales
@@ -86,6 +96,25 @@
 				turpis. Suspendisse vel hendrerit ipsum. Proin sollicitudin nibh
 				dui, et ornare lacus sollicitudin non. Aliquam maximus quam dui,
 				ac cursus sem pharetra ac.
+			</p>
+			<p>
+				Mauris ut mollis eros. Pellentesque feugiat sapien in sagittis
+				condimentum. Donec mauris tellus, porta a orci non, rutrum
+				ornare enim. Mauris molestie risus quis viverra finibus. Aliquam
+				fringilla ac arcu at interdum. Donec tincidunt vestibulum libero
+				vel efficitur. Quisque augue lorem, vulputate ut lorem at,
+				pellentesque efficitur est. Duis vitae orci augue. Donec in quam
+				nec lorem tristique lobortis vitae id sapien. Duis ipsum metus,
+				finibus ac dolor nec, sodales feugiat quam.
+			</p>
+			<p>
+				Donec sit amet aliquam mi, sit amet iaculis orci. Vivamus
+				consequat tellus elit, id rhoncus tellus scelerisque sed.
+				Vivamus purus libero, congue sed ligula non, consequat euismod
+				arcu. In sit amet suscipit dolor. Nulla sagittis orci porta dui
+				placerat, eget elementum urna maximus. Etiam a turpis a magna
+				commodo viverra sed nec libero. Duis sit amet mauris tempor,
+				varius libero vel, elementum lacus.
 			</p>
 			<p>
 				Praesent vitae lacus massa. Nullam convallis ut magna vitae
@@ -160,34 +189,32 @@ export default {
 	components: {
 		//ContentList
 	},
-	data() {
-		return {
-			// pointer
-			pointerPosition: 0,
-			pointerOrigin: 0,
-			pointerDragOffset: 0,
+	data: () => ({
+		// pointer
+		pointerPosition: 0,
+		pointerOrigin: 0,
+		pointerDragOffset: 0,
 
-			// scroll content
-			contentPosition: 0,
-			contentPreviousPosition: 0,
+		// scroll content
+		contentPosition: 0,
+		contentPreviousPosition: 0,
 
-			// checkers
-			isDragging: false,
-			isTracking: false,
-			isTouch: false,
+		// checkers
+		isDragging: false,
+		isTracking: false,
+		isTouch: false,
 
-			// physics
-			velocity: 0,
-			//friction: 0.05 => prop
+		// physics
+		velocity: 0,
+		//friction: 0.05 => prop
 
-			// animation frame
-			rafID: null,
+		// animation frame
+		rafID: null,
 
-			// misc
-			observer: null,
-			inViewport: false
-		}
-	},
+		// misc
+		observer: null,
+		inViewport: false
+	}),
 	props: {
 		friction: {
 			type: Number,
@@ -317,7 +344,9 @@ export default {
 		}
 	},
 	computed: {
-		// check if pointer is dragging or content is tracking
+		/**
+		 * Check if pointer is dragging or content is tracking
+		 */
 		isMoving() {
 			return this.isDragging || Math.abs(this.velocity) >= 0.05
 		}
@@ -359,7 +388,7 @@ export default {
 	padding: 8px;
 	touch-action: none;
 
-	& .intro {
+	& .hint {
 		width: 75%;
 		margin: 0 auto;
 		padding: 0px 4px 8px 4px;
@@ -436,5 +465,17 @@ mark {
 .marked {
 	color: #000;
 	background-color: var(--content-marked);
+}
+
+@media (min-width: 992px) {
+	.container {
+		& p {
+			padding-bottom: 2em;
+			color: var(--content-text);
+			font-size: 1.5em;
+			font-family: 'Noto Serif';
+			line-height: 1.45;
+		}
+	}
 }
 </style>

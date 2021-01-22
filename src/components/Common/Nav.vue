@@ -28,7 +28,7 @@
 				</router-link>
 				<router-link
 					:class="{
-						disabled: num == this.$router.options.routes.length
+						disabled: num == this.$router.options.routes.length - 1
 					}"
 					:to="this.$router.options.routes[next].path"
 					><svg
@@ -97,7 +97,9 @@ export default {
 	max-width: var(--content-width);
 	height: var(--nav-height);
 	padding: 0 16px;
+	color: var(--nav-text);
 	font-family: 'IBM Plex Mono', monospace;
+	background: var(--nav-bg);
 	//background: var(--nav-bg);
 }
 

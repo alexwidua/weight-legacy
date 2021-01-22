@@ -17,7 +17,7 @@
 			class="container"
 			:style="`transform:translateY(${contentPosition}px`"
 		>
-			<div class="intro">
+			<div class="hint">
 				Feed consumption will 'clog up' the feed over time.
 			</div>
 
@@ -41,36 +41,34 @@ export default {
 	components: {
 		ContentList
 	},
-	data() {
-		return {
-			// pointer
-			pointerPosition: 0,
-			pointerOrigin: 0,
-			pointerDragOffset: 0,
+	data: () => ({
+		// pointer
+		pointerPosition: 0,
+		pointerOrigin: 0,
+		pointerDragOffset: 0,
 
-			// scroll content
-			contentPosition: 0,
-			contentPreviousPosition: 0,
+		// scroll content
+		contentPosition: 0,
+		contentPreviousPosition: 0,
 
-			// checkers
-			isDragging: false,
-			isTracking: false,
-			isTouch: false,
+		// checkers
+		isDragging: false,
+		isTracking: false,
+		isTouch: false,
 
-			// physics
-			velocity: 0,
-			friction: 0.1,
+		// physics
+		velocity: 0,
+		friction: 0.1,
 
-			// animation frame
-			rafID: null,
+		// animation frame
+		rafID: null,
 
-			// paper num and map
-			paperNum: 0,
-			paperPosX: [],
-			paperPosY: [],
-			paperRot: []
-		}
-	},
+		// paper num and map
+		paperNum: 0,
+		paperPosX: [],
+		paperPosY: [],
+		paperRot: []
+	}),
 	props: {
 		// friction: {
 		// 	type: Number,
@@ -205,20 +203,26 @@ export default {
 		isMoving() {
 			return this.isDragging || Math.abs(this.velocity) >= 0.05
 		},
-		calcLength() {
-			return Math.floor(Math.abs(this.contentPosition / 1000))
+		/**
+		 * Create steps for friction increase
+		 */
+		calcFriction() {
+			return Math.floor(Math.abs(this.contentPosition / 1250))
 		},
-		calcLengthy() {
-			return Math.floor(Math.abs(this.contentPosition / 250))
+		/**
+		 * Create (smaller) steps for paper num increase
+		 */
+		calcPaperNum() {
+			return Math.floor(Math.abs(this.contentPosition / 350))
 		}
 	},
 	watch: {
-		calcLength() {
+		calcFriction() {
 			if (this.friction < 1) {
 				this.friction += 0.1
 			}
 		},
-		calcLengthy() {
+		calcPaperNum() {
 			this.paperRot.push(Math.floor(Math.random() * 100 - 50))
 			this.paperPosX.push(Math.floor(Math.random() * 100))
 			this.paperPosY.push(Math.floor(Math.random() * 20 - 10)) // 48px div height

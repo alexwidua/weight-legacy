@@ -1,6 +1,6 @@
 <template>
 	<div class="container" :style="`transform:translateY(${contentPosition}px`">
-		<div class="intro">
+		<div class="hint">
 			Tap ⚙️ to change the weight to make the feed feel lighter or
 			heavier.
 		</div>
@@ -15,30 +15,28 @@ export default {
 	components: {
 		ContentList
 	},
-	data() {
-		return {
-			// pointer
-			pointerPosition: 0,
-			pointerOrigin: 0,
-			pointerDragOffset: 0,
+	data: () => ({
+		// pointer
+		pointerPosition: 0,
+		pointerOrigin: 0,
+		pointerDragOffset: 0,
 
-			// scroll content
-			contentPosition: 0,
-			contentPreviousPosition: 0,
+		// scroll content
+		contentPosition: 0,
+		contentPreviousPosition: 0,
 
-			// checkers
-			isDragging: false,
-			isTracking: false,
-			isTouch: false,
+		// checkers
+		isDragging: false,
+		isTracking: false,
+		isTouch: false,
 
-			// physics
-			velocity: 0,
-			//friction: 0.05 => prop
+		// physics
+		velocity: 0,
+		//friction: 0.05 => prop
 
-			// animation frame
-			rafID: null
-		}
-	},
+		// animation frame
+		rafID: null
+	}),
 	props: {
 		friction: {
 			type: Number,
@@ -157,7 +155,7 @@ export default {
 	},
 	computed: {
 		/**
-		 * Check if DOM content still has momentum
+		 * Check if pointer is dragging or DOM content still has momentum
 		 */
 		isMoving() {
 			return this.isDragging || Math.abs(this.velocity) >= 0.05

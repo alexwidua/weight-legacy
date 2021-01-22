@@ -1,3 +1,16 @@
+// used for silly intro page transition
+.icon-fade-enter-active,
+.icon-fade-leave-active {
+	transition: all 0.2s ease;
+}
+
+.icon-fade-enter,
+.icon-fade-leave-to {
+	transform: scale(1.5);
+	opacity: 0;
+}
+
+// used forsetting menu slide in
 .slide-fade-enter-active,
 .slide-fade-leave-active {
 	transition: all 0.2s ease;

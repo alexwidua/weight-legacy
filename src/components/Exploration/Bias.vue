@@ -4,7 +4,7 @@
 		:style="`transform:translateY(${contentPosition}px`"
 		ref="container"
 	>
-		<div class="intro">
+		<div class="hint">
 			Weight gives a bias to certain posts in the feed.
 		</div>
 		<Post
@@ -49,35 +49,33 @@ export default {
 	components: {
 		Post
 	},
-	data() {
-		return {
-			// pointer
-			pointerPosition: 0,
-			pointerOrigin: 0,
-			pointerDragOffset: 0,
+	data: () => ({
+		// pointer
+		pointerPosition: 0,
+		pointerOrigin: 0,
+		pointerDragOffset: 0,
 
-			// scroll content
-			contentPosition: 0,
-			contentPreviousPosition: 0,
+		// scroll content
+		contentPosition: 0,
+		contentPreviousPosition: 0,
 
-			// checkers
-			isDragging: false,
-			isTracking: false,
-			isTouch: false,
+		// checkers
+		isDragging: false,
+		isTracking: false,
+		isTouch: false,
 
-			// physics
-			velocity: 0,
-			friction: 0.05,
+		// physics
+		velocity: 0,
+		friction: 0.05,
 
-			// animation frame
-			rafID: null,
+		// animation frame
+		rafID: null,
 
-			// misc
-			targetInViewport: false,
-			target: 1450
-			//bias: 5
-		}
-	},
+		// misc
+		targetInViewport: false,
+		target: 1450
+		//bias: 5
+	}),
 	props: {
 		bias: {
 			type: Number,
@@ -235,7 +233,9 @@ export default {
 		}
 	},
 	computed: {
-		// check if pointer is dragging or content is tracking
+		/**
+		 * Check if pointer is dragging or content is tracking
+		 */
 		isMoving() {
 			return this.isDragging || Math.abs(this.velocity) >= 0.02
 		}

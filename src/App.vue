@@ -25,14 +25,16 @@ export default {
 #app {
 	max-width: var(--content-width);
 	margin: 0 auto;
-	//margin-top: 48px;
+	padding-top: 48px;
 	background: var(--app-bg);
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 }
 
 @media (min-width: 992px) {
 	#app {
 		position: relative;
-		max-height: calc(100vh - 48px);
+		//max-height: calc(100vh - 48px);
+		max-height: 100vh;
 	}
 }
 </style>
