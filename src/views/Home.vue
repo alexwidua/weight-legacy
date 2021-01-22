@@ -24,7 +24,9 @@
 			</p>
 
 			<p class="footnotes">
-				<a href="#">Documentation (TODO)</a><br />
+				<a href="#" style="text-decoration: line-through;"
+					>Documentation (TODO)</a
+				><br />
 				<a href="https://github.com/alexwidua/weight">Source</a><br />
 			</p>
 		</div>
@@ -92,6 +94,7 @@ export default {
 	max-width: 750px;
 	height: 48px;
 	//padding: 0 8px;
+	background: #000;
 	border-bottom: 1px solid #1d1d1d;
 
 	& .cta {
