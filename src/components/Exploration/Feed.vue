@@ -18,7 +18,7 @@
 			:style="`transform:translateY(${contentPosition}px`"
 		>
 			<div class="hint">
-				Feed consumption will 'clog up' the feed over time.
+				🗑️ Consuming the feed will 'clog it up' over time.
 			</div>
 
 			<ContentList />
@@ -260,11 +260,14 @@ export default {
 .consumption {
 	position: fixed;
 	top: var(--nav-height);
-	left: 0;
+	left: 50%;
 	z-index: 10;
 	width: 100%;
 	max-width: var(--content-width);
-	//height: var(--nav-height);
+	height: 100%;
+	overflow: hidden;
+	transform: translateX(-50%);
+	pointer-events: none;
 }
 
 .paper {

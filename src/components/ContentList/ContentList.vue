@@ -1,7 +1,6 @@
 <template>
 	<div class="container">
 		<Post v-for="(post, index) in posts" :key="index" :post="post" />
-		<!--TODO: remove color (used for debugging)-->
 		<div
 			ref="loadTrigger"
 			style="display:block;width:100px; height:100px;"
@@ -9,7 +8,7 @@
 	</div>
 </template>
 <script>
-// load local mock api
+// load local mock API
 import fetchPosts from '../../js/mockAPI'
 import Post from './ContentListPost.vue'
 
@@ -45,7 +44,7 @@ export default {
 		// load initial posts
 		this.posts = fetchPosts(this.numPosts)
 		if (this.infiniteLoad) {
-			// trigger element at bottom of list triggers new content load
+			// element at bottom of list triggers new content load
 			this.observer.observe(this.$refs.loadTrigger)
 		}
 	},

@@ -52,6 +52,7 @@ export default {
 
 <style lang="scss">
 .aware {
+	background: var(--app-bg);
 	&-icon {
 		margin: 0 8px;
 	}

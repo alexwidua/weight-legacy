@@ -15,19 +15,28 @@
 				/>
 			</transition>
 			<p>
-				This is a small exploration into (perceived) weight and friction
-				in the context of digital screens.
+				How much does a digital screen weigh? <br />
+				And can the weight of a creen be modified?<br />
+				<br />
+				This exploration explores this question and investigates whether
+				screens have a perceived weight and how this weight can affect
+				the user experience.
 			</p>
-			<p>
-				It was created as part of the 'Form' course at Umeå Institute of
-				Design.
-			</p>
+			<div class="desktop-hint">
+				<div v-html="`⚠️`" />
+				<div>
+					<em>You seem to be on a laptop or desktop.</em><br /><br />
+					This experiment was designed for drag-to-scroll interactions
+					on a smartphone and it's most effective when experienced
+					through a smartphone.<br />
+					It kinda works with a mouse input but is a bad experience
+					with a trackpad.
+				</div>
+			</div>
 
 			<p class="footnotes">
-				<a href="#" style="text-decoration: line-through;"
-					>Documentation (TODO)</a
+				<a href="https://github.com/alexwidua/weight">Source @ GitHub</a
 				><br />
-				<a href="https://github.com/alexwidua/weight">Source</a><br />
 			</p>
 		</div>
 	</div>
@@ -46,6 +55,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	max-width: 750px;
+	height: 48px;
+	background: #000;
+	border-bottom: 1px solid var(--nav-border);
+
+	& .cta {
+		display: block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: auto;
+		height: 100%;
+		padding: 4px 24px;
+		color: #fff;
+		text-decoration: none;
+		background: #000;
+		border-left: 1px solid var(--nav-border);
+	}
+}
+
 .intro {
 	width: 100%;
 	max-width: var(--content-width);
@@ -61,6 +95,26 @@ export default {
 		width: 75%;
 		margin: 0 auto;
 		padding: 64px 16px 16px 16px;
+
+		& .desktop-hint {
+			display: none;
+			margin: 24px 0 48px 0;
+			padding: 24px;
+			color: rgba(0, 0, 0, 0.8);
+			font-size: 1.15rem;
+			font-family: 'Inter';
+			line-height: 1.25em;
+			letter-spacing: -0.02em;
+			background: var(--color-yellow);
+
+			& div:first-child {
+				margin-right: 16px;
+			}
+
+			& em {
+				font-weight: 600;
+			}
+		}
 	}
 
 	& p {
@@ -86,31 +140,9 @@ export default {
 	}
 }
 
-.nav {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	width: 100%;
-	max-width: 750px;
-	height: 48px;
-	//padding: 0 8px;
-	background: #000;
-	border-bottom: 1px solid #1d1d1d;
-
-	& .cta {
-		display: block;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: auto;
-		height: 100%;
-		//margin: 32px auto;
-		padding: 4px 24px;
-		color: #fff;
-		text-decoration: none;
-		background: #000;
-		border-left: 1px solid #1d1d1d;
-		//border-radius: 32px;
+@media (min-width: 992px) {
+	.intro .inner .desktop-hint {
+		display: flex;
 	}
 }
 </style>

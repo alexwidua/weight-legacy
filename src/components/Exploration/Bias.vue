@@ -5,7 +5,7 @@
 		ref="container"
 	>
 		<div class="hint">
-			Weight gives a bias to certain posts in the feed.
+			💫 Gravity gives certain posts a bias.
 		</div>
 		<Post
 			v-for="i in 6"

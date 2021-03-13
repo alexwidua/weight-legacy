@@ -71,7 +71,6 @@ export default {
 	},
 	computed: {
 		prev() {
-			//const n = this.num - 1 - 1
 			const n = this.num - 1
 			return n > -1 ? n : 0
 		},
@@ -100,7 +99,6 @@ export default {
 	color: var(--nav-text);
 	font-family: 'IBM Plex Mono', monospace;
 	background: var(--nav-bg);
-	//background: var(--nav-bg);
 }
 
 .pagination {
@@ -115,7 +113,6 @@ export default {
 	&-control {
 		height: 16px;
 		& a {
-			//padding: 0 8px;
 			padding: 4px 8px 4px 8px;
 			color: var(--nav-text);
 			line-height: 16px;

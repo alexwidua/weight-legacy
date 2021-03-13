@@ -88,6 +88,7 @@ export default {
 
 <style lang="scss">
 .bias {
+	background: var(--app-bg);
 	&-display {
 		display: flex;
 		align-items: center;

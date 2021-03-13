@@ -1,7 +1,7 @@
 <template>
 	<div class="container" :style="`transform:translateY(${contentPosition}px`">
 		<div class="hint">
-			'Gravity' will pull this feed back to its origin.
+			🌍 'Gravity' will pull the feed back to its origin.
 		</div>
 		<ContentList />
 	</div>

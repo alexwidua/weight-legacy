@@ -12,10 +12,16 @@
 }
 
 .hint {
-	padding: 8px 32px 0 32px;
-	font-size: 0.75em;
+	padding: 16px 32px 16px 32px;
+	font-size: 1em;
 	font-family: 'Roboto Mono', monospace;
 	line-height: 1.5em;
 	text-align: center;
-	opacity: 0.75;
+	background: var(--color-yellow);
+}
+
+@media (min-width: 992px) {
+	.hint {
+		font-size: 1.5em;
+	}
 }

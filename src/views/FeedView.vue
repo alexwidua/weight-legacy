@@ -1,48 +1,5 @@
 <template>
-	<div class="weight">
-		<!-- <div
-			class="cog"
-			@click="controlsVisible = !controlsVisible"
-			v-html="`⚙️`"
-		/>
-		<transition name="slide-fade">
-			<div v-if="controlsVisible" class="control">
-				<div class="weight-display">
-					<span class="weight-icon">⚖️</span>
-					<span class="weight-value">{{
-						toFriction.toFixed(2)
-					}}</span>
-					<span class="weight-unit">kg</span>
-				</div>
-				<div
-					class="control-button control-button--first"
-					:class="{ disabled: weight == 0 }"
-					@click="decrease"
-				>
-					<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-						<path
-							d="M0 8C1.82857 8 11.4286 8 16 8"
-							stroke="white"
-							stroke-width="2"
-						/>
-					</svg>
-				</div>
-				<div class="control-button" @click="increase">
-					<svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-						<path
-							d="M0 8C1.82857 8 11.4286 8 16 8"
-							stroke="white"
-							stroke-width="2"
-						/>
-						<path
-							d="M8 16C8 14.1714 8 4.57143 8 -8.9407e-08"
-							stroke="white"
-							stroke-width="2"
-						/>
-					</svg>
-				</div>
-			</div>
-		</transition> -->
+	<div class="feed">
 		<Content />
 	</div>
 </template>
@@ -84,7 +41,8 @@ export default {
 </script>
 
 <style lang="scss">
-.weight {
+.feed {
+	background: var(--app-bg);
 	&-display {
 		display: flex;
 		align-items: center;

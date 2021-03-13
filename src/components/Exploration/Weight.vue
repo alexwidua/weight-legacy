@@ -1,7 +1,7 @@
 <template>
 	<div class="container" :style="`transform:translateY(${contentPosition}px`">
 		<div class="hint">
-			Tap ⚙️ to change the weight to make the feed feel lighter or
+			Tap ⚙️ to change the weight to make the scrolling feel lighter or
 			heavier.
 		</div>
 		<ContentList />
@@ -151,6 +151,9 @@ export default {
 			this.contentPosition += this.velocity
 			// prevent scrolling out of bounds
 			this.contentPosition = Math.min(this.contentPosition, 0)
+		},
+		handleScroll() {
+			console.log('Scroll')
 		}
 	},
 	computed: {

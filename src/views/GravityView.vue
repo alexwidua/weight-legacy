@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="gravity">
 		<div
 			class="cog"
 			@click="controlsVisible = !controlsVisible"
@@ -56,9 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
-// .gravity {
-// 	& .control-button:not(:last-child) {
-// 		margin-right: 8px;
-// 	}
-// }
+.gravity {
+	background: var(--app-bg);
+}
 </style>

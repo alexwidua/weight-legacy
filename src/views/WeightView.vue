@@ -85,6 +85,7 @@ export default {
 
 <style lang="scss">
 .weight {
+	background: var(--app-bg);
 	&-display {
 		display: flex;
 		align-items: center;
